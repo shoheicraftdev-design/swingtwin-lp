@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwingTwin スイングツイン — 過去と今のスイングを重ねて見る</title>
+<meta name="description" content="新旧2本のゴルフスイング動画を、大きさ・位置・タイミングを自動で揃えて重ねて比較するiPhoneアプリ。撮った日が違っても、フォームの差だけが見えます。">
+<meta property="og:title" content="SwingTwin スイングツイン — 過去と今のスイングを重ねて見る">
+<meta property="og:description" content="新旧2本のゴルフスイング動画を、大きさ・位置・タイミングを自動で揃えて重ねて比較するiPhoneアプリ。">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f5f5f7;
+    --fg: #1c1c1e;
+    --fg-soft: #5a5a5f;
+    --line: #e3e3e6;
+    --accent: #0a66c2;
+    --card: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111113;
+      --bg-soft: #1c1c1f;
+      --fg: #f2f2f4;
+      --fg-soft: #a8a8ae;
+      --line: #2e2e33;
+      --accent: #7ab8f5;
+      --card: #1c1c1f;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+    line-height: 1.85;
+    color: var(--fg);
+    background: var(--bg);
+    font-size: 16px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  /* hero */
+  .hero { text-align: center; padding: 72px 0 56px; }
+  .icon { width: 84px; height: 84px; border-radius: 20px; margin-bottom: 20px; }
+  .mark {
+    display: inline-block; font-size: 0.8rem; letter-spacing: .12em;
+    color: var(--fg-soft); border: 1px solid var(--line);
+    border-radius: 999px; padding: 4px 14px; margin-bottom: 22px;
+  }
+  h1 { font-size: clamp(2rem, 7vw, 3rem); line-height: 1.35; margin: 0 0 18px; letter-spacing: .01em; }
+  .lead { font-size: clamp(1rem, 3.4vw, 1.15rem); color: var(--fg-soft); margin: 0 auto 32px; max-width: 34em; }
+  .cta {
+    display: inline-block; background: var(--fg); color: var(--bg);
+    text-decoration: none; font-weight: 600;
+    padding: 14px 30px; border-radius: 999px; font-size: 1rem;
+  }
+  .cta:hover { opacity: .85; }
+  .cta-note { display: block; margin-top: 12px; font-size: .85rem; color: var(--fg-soft); }
+
+  h2 { font-size: clamp(1.3rem, 4.6vw, 1.7rem); margin: 0 0 10px; line-height: 1.45; }
+  h3 { font-size: 1.05rem; margin: 0 0 6px; }
+  .sub { color: var(--fg-soft); margin: 0 0 30px; }
+  p { margin: 0 0 1em; }
+
+  /* before/after comparison */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 26px; }
+  .compare > div {
+    background: var(--bg-soft); border-radius: 16px; padding: 24px 20px;
+  }
+  .compare .label { font-size: .82rem; color: var(--fg-soft); margin-bottom: 10px; }
+  .compare strong { display: block; font-size: 1rem; margin-bottom: 8px; }
+  .compare p { font-size: .92rem; color: var(--fg-soft); margin: 0; }
+  @media (max-width: 560px) { .compare { grid-template-columns: 1fr; } }
+
+  /* feature rows */
+  .row { display: grid; grid-template-columns: 1fr 260px; gap: 40px; align-items: center; }
+  .row.flip { grid-template-columns: 260px 1fr; }
+  .row.flip .shot { order: -1; }
+  .shot img {
+    width: 100%; max-width: 260px; height: auto; display: block; margin: 0 auto;
+    border-radius: 22px; border: 1px solid var(--line);
+  }
+  @media (max-width: 720px) {
+    .row, .row.flip { grid-template-columns: 1fr; gap: 26px; }
+    .row.flip .shot { order: 0; }
+  }
+
+  ul { padding-left: 1.3em; margin: 0 0 1em; }
+  li { margin-bottom: .4em; }
+  .note { background: var(--bg-soft); border-radius: 14px; padding: 20px 22px; color: var(--fg-soft); font-size: .94rem; }
+  a { color: var(--accent); }
+
+  footer { padding: 40px 0 64px; font-size: .9rem; color: var(--fg-soft); text-align: center; }
+  footer a { margin: 0 10px; display: inline-block; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="icon" src="images/appicon.png" alt="SwingTwin アプリアイコン">
+    <span class="mark">iPhone アプリ</span>
+    <h1>スイングを撮っても、<br>見返して終わっていませんか。</h1>
+    <p class="lead">
+      SwingTwin（スイングツイン）は、過去のスイングと今のスイングを「重ねて」比べるアプリです。<br>
+      撮った日が違っても、大きさ・位置・タイミングを自動で揃えるから、残った差だけがフォームの違いになります。
+    </p>
+    <a class="cta" href="https://apps.apple.com/jp/app/swingtwin/id6806578247">App Store で見る</a>
+    <span class="cta-note">完全無料・アプリ内課金なし</span>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>撮った日が違っても、同じ大きさ・同じ位置に揃う</h2>
+    <p class="sub">打席の場所も、カメラを置く距離も、その日によって違います。そのまま並べても、写り方が違うだけでフォームの差なのか分かりません。</p>
+
+    <div class="compare">
+      <div>
+        <div class="label">よくある比較</div>
+        <strong>ただ並べて見る</strong>
+        <p>大きさも位置もバラバラなまま並ぶので、見比べるのに毎回頭の中で補正が必要です。</p>
+      </div>
+      <div>
+        <div class="label">SwingTwin</div>
+        <strong>自動で土台を揃えてから重ねる</strong>
+        <p>身長が同じ大きさに、足元が同じ位置になるよう自動で合わせます。土台が揃うので、残った差だけがフォームの違いです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <h2>動画を2本選ぶだけ</h2>
+        <p>写真アプリから「旧スイング」に過去の動画、「新スイング」に今の動画を選びます。2本そろうと、人物の大きさと位置を合わせる解析が自動で始まります。</p>
+        <p class="sub" style="margin-bottom:0">アプリ内に撮影機能はありません。iPhone標準のカメラなどで撮った動画をそのまま使います。</p>
+      </div>
+      <div class="shot"><img src="images/shot-select.png" alt="スイングを選ぶ画面。旧スイングと新スイングの動画を選択し、位置合わせ済みと表示されている" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="row flip">
+      <div class="shot"><img src="images/shot-markers.png" alt="基準点を指定する画面。始動・トップ・インパクト・フォローの4点をスライダーとコマ送りで指定できる" loading="lazy"></div>
+      <div>
+        <h2>トップもインパクトも、同じ瞬間で見比べる</h2>
+        <p>スイングの速さは日によって変わります。始動・トップ・インパクト・フォローの4点を指定すると、その間の速さを区間ごとに合わせて、同じ瞬間どうしが並ぶようにします。</p>
+        <p class="sub" style="margin-bottom:0">スライダーで場面を探し、1コマずつ調整できます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <h2>重ねる／並べる、どちらでも</h2>
+        <p>重ねて透かして見れば、ズレがそのまま差として見えます。新しい方の濃さは自由に変えられます。</p>
+        <p class="sub" style="margin-bottom:0">左右に並べれば、それぞれの形をしっかり確認できます。</p>
+      </div>
+      <div class="shot"><img src="images/shot-overlay.png" alt="比較再生画面。旧スイングと新スイングをトップの瞬間で重ねて表示している" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="row flip">
+      <div class="shot"><img src="images/shot-side-by-side.png" alt="比較再生画面。旧スイングと新スイングをトップの瞬間で左右に並べて表示している" loading="lazy"></div>
+      <div>
+        <h2>細かく見るための操作</h2>
+        <ul>
+          <li>0.25倍・0.5倍のスロー再生</li>
+          <li>1コマずつの送り戻し</li>
+          <li>始動・トップ・インパクト・フォローへのワンタップ移動</li>
+        </ul>
+        <p class="sub" style="margin-bottom:0">気になる瞬間で止めて、じっくり見られます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>比較した結果は、動画として残せる</h2>
+    <p>重ねた映像をそのまま書き出して、写真アプリに保存できます。アプリを開かなくても、練習の後に見返せます。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>すべて無料・すべてiPhoneの中で完結します</h2>
+    <p><strong>SwingTwin は完全無料です。</strong>アプリ内課金・サブスクリプションはありません。</p>
+    <p>動画をどこかへ送信することもありません。解析・比較・書き出しは、すべて端末の中だけで行われます。サーバーへ送信するデータはなく、解析SDK・広告SDKも入れていません。アカウント登録も不要です。</p>
+    <div class="note">
+      こんな方に向いています——過去の自分と今の自分を見比べたい方、練習の成果を数字ではなく映像で確かめたい方、動画は撮るけど見返し方に迷っていた方。
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>対応環境</h2>
+    <ul>
+      <li>iOS 18.0 以上の iPhone</li>
+      <li>比較する動画は、写真アプリに保存されている必要があります（アプリ内に撮影機能はありません）</li>
+      <li>1本あたり 0.2秒〜60秒の動画に対応しています</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><a class="cta" href="https://apps.apple.com/jp/app/swingtwin/id6806578247">App Store で見る</a></p>
+    <p style="margin-top:26px">
+      <a href="https://shoheicraftdev-design.github.io/swingtwin-support/">サポート・使い方</a>
+      <a href="https://shoheicraftdev-design.github.io/swingtwin-support/privacy.html">プライバシーポリシー</a>
+      <a href="https://shoheicraftdev-design.github.io/swingtwin-support/terms.html">利用規約</a>
+      <a href="mailto:shohei.craft.dev@gmail.com">お問い合わせ</a>
+    </p>
+    <p style="margin-top:18px">ShoheiCraftDev</p>
+  </div>
+</footer>
+
+</body>
+</html>
