@@ -2,7 +2,7 @@
 
 iPhone アプリ「SwingTwin（スイングツイン）」（内部名 GolfSwingCompare）の製品紹介ページ。GitHub Pages で公開する想定。
 
-- 公開URL: https://shoheicraftdev-design.github.io/swingtwin-lp/ **未公開**（下記「公開手順」参照）
+- 公開URL: https://shoheicraftdev-design.github.io/swingtwin-lp/ **公開済み**（2026-09-04）
 - App Store: **公開中**（2026-09-02）。`https://apps.apple.com/jp/app/swingtwin/id6806578247`
 - サポート / プライバシーポリシー / 利用規約: https://shoheicraftdev-design.github.io/swingtwin-support/
 
@@ -38,5 +38,4 @@ GearDeban LP（`geardeban-lp`）・Sodato LP（`sodato-lp`）・えも日LP（`e
 
 ## 公開手順
 
-未公開。geardeban-lp と同じ手順で GitHub リポジトリを新規作成し GitHub Pages を有効化する想定。
-公開はCEO確認の上で行う。
+**完了。** geardeban-lp と同じ手順で GitHub リポジトリを新規作成し GitHub Pages を有効化した（2026-09-04・CEO確認済み）。
