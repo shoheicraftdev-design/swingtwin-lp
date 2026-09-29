@@ -14,6 +14,10 @@ GearDeban LP（`geardeban-lp`）・Sodato LP（`sodato-lp`）・えも日LP（`e
 
 ## 内容の版
 
+**ブランチ `ver-2.0`: ver-2.0（2026-09-28 審査提出・審査中）に合わせて作成。審査承認・App Store 公開を確認してから main へ入れる（それまで公開しない）。**
+正本はアプリ側 `docs/appstore/ver-2.0-store-listing.md`（§2 サブタイトル・§6 説明文・§7 有料プラン）と `ver-2.0-submission.md`。LP で新しい言い回しを作らない。
+ASC のマーケティングURL に本ページ（`https://shoheicraftdev-design.github.io/swingtwin-lp/`）を ver-2.0 で設定済み（submission #31）。
+
 **v1.1 に合わせて更新（2026-09-28）。** v1.0（2026-09-02 App Store 公開）で作成し、v1.1 で対応環境を iOS 17.0 以上に訂正、ピンチでの拡大・縮小・移動と書き出し形式（並べる／重ねる）の選択を追記。
 
 ## 素材
@@ -23,14 +27,15 @@ GearDeban LP（`geardeban-lp`）・Sodato LP（`sodato-lp`）・えも日LP（`e
 | ファイル | 元 |
 | :--- | :--- |
 | `appicon.png` | `GolfSwingCompare/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png` の縮小（256px） |
-| `shot-select.png` | `docs/appstore/screenshots/6.5-inch/03-select-aligned.png`（スイングを選ぶ・位置合わせ済み） |
-| `shot-markers.png` | `docs/appstore/screenshots/6.5-inch/02-markers-top.png`（基準点を指定） |
-| `shot-overlay.png` | `docs/appstore/screenshots/6.5-inch/01-overlay-top.png`（比較再生・重ねる） |
-| `shot-side-by-side.png` | `docs/appstore/screenshots/6.5-inch/04-side-by-side.png`（比較再生・並べる） |
+| `shot-overlay-trails.png` | `docs/appstore/screenshots/ver-2.0/6.5-inch/01-overlay-trails.png`（重ねる＋軌跡・有料プラン） |
+| `shot-overlay-free.png` | `docs/appstore/screenshots/ver-2.0/6.5-inch/02-overlay-free.png`（重ねる・軌跡なし） |
+| `shot-sidebyside-trails.png` | `docs/appstore/screenshots/ver-2.0/6.5-inch/03-sidebyside-trails.png`（並べる＋軌跡・有料プラン） |
+| `shot-checkpoints.png` | `docs/appstore/screenshots/ver-2.0/6.5-inch/04-checkpoints.png`（基準点を指定） |
+| `shot-video-select.png` | `docs/appstore/screenshots/ver-2.0/6.5-inch/05-video-select.png`（スイングを選ぶ・位置合わせ済み） |
 
-いずれも長辺640pxへ縮小。差し替える場合は元の1284×2778から作り直すこと。
+いずれも長辺640pxへ縮小（`sips -Z 640`・296×640）。キャプション帯は掲載スクショに焼き込まれたまま。差し替える場合は元の1284×2778から作り直すこと。
 
-## 文言のルール（アプリ側 `docs/appstore/v1-store-listing.md` の内容を継承）
+## 文言のルール（アプリ側 `docs/appstore/ver-2.0-store-listing.md` の内容を継承）
 
 - 訴求の軸は「土台を揃えてから重ねる」——大きさ・位置・タイミングを自動で合わせるから、残った差だけがフォームの違いになる。
 - 他アプリとの比較・優劣（固有名詞での名指し）は書かない。
