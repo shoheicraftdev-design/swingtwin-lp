@@ -6,270 +6,277 @@
 <title>SwingTwin スイングツイン — ゴルフスイング軌跡を重ねて比較</title>
 <meta name="description" content="新旧2本のゴルフスイング動画を、大きさ・位置・タイミングを自動で揃えて重ねて比較するiPhoneアプリ。後方（飛球線の後ろ）から撮ったスロー動画なら、クラブヘッドの軌跡も重ねて表示できます。">
 <meta property="og:title" content="SwingTwin スイングツイン — ゴルフスイング軌跡を重ねて比較">
-<meta property="og:description" content="新旧2本のゴルフスイング動画を、大きさ・位置・タイミングを自動で揃えて重ねて比較するiPhoneアプリ。後方から撮ったスロー動画なら、クラブヘッドの軌跡も重ねて表示できます。">
+<meta property="og:description" content="新旧2本のゴルフスイング動画を、大きさ・位置・タイミングを自動で揃えて重ねて比較するiPhoneアプリ。後方（飛球線の後ろ）から撮ったスロー動画なら、クラブヘッドの軌跡も重ねて表示できます。">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#0A101D">
+<link rel="icon" href="images/appicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&amp;family=Outfit:wght@500;600;700&amp;display=swap">
 <style>
-  :root {
-    --bg: #ffffff;
-    --bg-soft: #f5f5f7;
-    --fg: #1c1c1e;
-    --fg-soft: #5a5a5f;
-    --line: #e3e3e6;
-    --accent: #0a66c2;
-    --card: #ffffff;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #111113;
-      --bg-soft: #1c1c1f;
-      --fg: #f2f2f4;
-      --fg-soft: #a8a8ae;
-      --line: #2e2e33;
-      --accent: #7ab8f5;
-      --card: #1c1c1f;
-    }
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
-    line-height: 1.85;
-    color: var(--fg);
-    background: var(--bg);
-    font-size: 16px;
-  }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
-  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
-  section:last-of-type { border-bottom: none; }
-
-  /* hero */
-  .hero { text-align: center; padding: 72px 0 56px; }
-  .icon { width: 84px; height: 84px; border-radius: 20px; margin-bottom: 20px; }
-  .mark {
-    display: inline-block; font-size: 0.8rem; letter-spacing: .12em;
-    color: var(--fg-soft); border: 1px solid var(--line);
-    border-radius: 999px; padding: 4px 14px; margin-bottom: 22px;
-  }
-  h1 { font-size: clamp(2rem, 7vw, 3rem); line-height: 1.35; margin: 0 0 18px; letter-spacing: .01em; }
-  .lead { font-size: clamp(1rem, 3.4vw, 1.15rem); color: var(--fg-soft); margin: 0 auto 32px; max-width: 34em; }
-  .cta {
-    display: inline-block; background: var(--fg); color: var(--bg);
-    text-decoration: none; font-weight: 600;
-    padding: 14px 30px; border-radius: 999px; font-size: 1rem;
-  }
-  .cta:hover { opacity: .85; }
-  .cta-note { display: block; margin-top: 12px; font-size: .85rem; color: var(--fg-soft); }
-
-  h2 { font-size: clamp(1.3rem, 4.6vw, 1.7rem); margin: 0 0 10px; line-height: 1.45; }
-  h3 { font-size: 1.05rem; margin: 0 0 6px; }
-  .sub { color: var(--fg-soft); margin: 0 0 30px; }
-  p { margin: 0 0 1em; }
-
-  /* before/after comparison */
-  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 26px; }
-  .compare > div {
-    background: var(--bg-soft); border-radius: 16px; padding: 24px 20px;
-  }
-  .compare .label { font-size: .82rem; color: var(--fg-soft); margin-bottom: 10px; }
-  .compare strong { display: block; font-size: 1rem; margin-bottom: 8px; }
-  .compare p { font-size: .92rem; color: var(--fg-soft); margin: 0; }
-  @media (max-width: 560px) { .compare { grid-template-columns: 1fr; } }
-
-  /* feature rows */
-  .row { display: grid; grid-template-columns: 1fr 260px; gap: 40px; align-items: center; }
-  .row.flip { grid-template-columns: 260px 1fr; }
-  .row.flip .shot { order: -1; }
-  .shot img {
-    width: 100%; max-width: 260px; height: auto; display: block; margin: 0 auto;
-    border-radius: 22px; border: 1px solid var(--line);
-  }
-  @media (max-width: 720px) {
-    .row, .row.flip { grid-template-columns: 1fr; gap: 26px; }
-    .row.flip .shot { order: 0; }
-  }
-
-  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-  .pair img {
-    width: 100%; max-width: 260px; height: auto; display: block; margin: 0 auto;
-    border-radius: 22px; border: 1px solid var(--line);
-  }
-  @media (max-width: 560px) { .pair { grid-template-columns: 1fr; } }
-
-  table.plan { width: 100%; border-collapse: collapse; margin: 0 0 1.4em; font-size: .95rem; }
-  table.plan th, table.plan td { border-bottom: 1px solid var(--line); padding: 10px 8px; text-align: left; vertical-align: top; }
-  table.plan th { color: var(--fg-soft); font-weight: 600; width: 34%; }
-
-  ul { padding-left: 1.3em; margin: 0 0 1em; }
-  li { margin-bottom: .4em; }
-  .note { background: var(--bg-soft); border-radius: 14px; padding: 20px 22px; color: var(--fg-soft); font-size: .94rem; }
-  a { color: var(--accent); }
-
-  footer { padding: 40px 0 64px; font-size: .9rem; color: var(--fg-soft); text-align: center; }
-  footer a { margin: 0 10px; display: inline-block; }
+body{margin:0;background:#0A101D}
+a{color:#7FB3FF}a:hover{color:#B5D3FF}
+.st-wrap{max-width:1120px;margin:0 auto;padding:0 24px;box-sizing:border-box}
+.st-phone{display:block;width:100%;height:auto;border-radius:36px;border:8px solid #1B2438;box-sizing:border-box;background:#000}
+.st-cta{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;text-decoration:none;font-weight:700;font-size:16px}
+.st-cta:hover{filter:brightness(1.08)}
+.st-foot a{color:#9AA8C0;text-decoration:none}
+.st-foot a:hover{color:#E8EEF8;text-decoration:underline}
+@media (max-width:720px){
+.st-hide-sm{display:none}
+.st-hero-phones{height:400px}
+}
 </style>
 </head>
 <body>
+<div style="font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;color:#E8EEF8;background:#0A101D;line-height:1.8;font-size:16px;overflow:hidden">
 
-<header class="hero">
-  <div class="wrap">
-    <img class="icon" src="images/appicon.png" alt="SwingTwin アプリアイコン">
-    <span class="mark">iPhone アプリ</span>
-    <h1>スイングを撮っても、<br>見返して終わっていませんか。</h1>
-    <p class="lead">
-      SwingTwin（スイングツイン）は、過去のスイングと今のスイングを「重ねて」比べるアプリです。<br>
-      撮った日が違っても、大きさ・位置・タイミングを自動で揃えるから、残った差だけがフォームの違いになります。
-    </p>
-    <a class="cta" href="https://apps.apple.com/jp/app/swingtwin/id6806578247">App Store で見る</a>
-    <span class="cta-note">本体無料（広告あり）・広告なしで使える有料プラン（SwingTwin Pro）あり</span>
-  </div>
+<!-- ===== HERO ===== -->
+<header style="position:relative;padding:28px 0 96px">
+<div class="st-wrap" style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:72px">
+<div style="display:flex;align-items:center;gap:12px">
+<img src="images/appicon.png" alt="" style="width:40px;height:40px;border-radius:10px">
+<span style="font-family:Outfit,sans-serif;font-weight:700;font-size:20px;letter-spacing:.01em">SwingTwin</span>
+</div>
+<a class="st-cta" href="https://apps.apple.com/jp/app/swingtwin/id6806578247" style="min-height:44px;padding:0 20px;font-size:14px;background:transparent;color:#E8EEF8;border:1px solid #33405A">App Store で見る</a>
+</div>
+
+<div class="st-wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:56px">
+<div style="flex:1 1 460px;min-width:0">
+<div style="display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:500;letter-spacing:.14em;color:#9AA8C0;margin-bottom:28px">
+<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#4C8DF6"></span>
+<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3ED6B5;margin-left:-14px;opacity:.9"></span>
+<span>iPhone アプリ ／ ゴルフスイング比較</span>
+</div>
+<h1 style="margin: 0 0 28px; font-weight: 900; font-size: clamp(36px,5.6vw,64px); line-height: 1.28; letter-spacing: .01em; max-width: 600px">スイングを撮っても<br>見返して終わりに<br>なっていませんか。</h1>
+<p style="margin:0 0 40px;font-size:clamp(16px,1.6vw,18px);color:#B4C0D4;max-width:30em">SwingTwin（スイングツイン）は、過去のスイングと今のスイングを<strong style="color: rgb(232, 238, 248); font-weight: 700">「重ねる」・</strong><span style="color: rgb(232, 238, 248); font-weight: 700">「並べる」</span>で比べるアプリです。<br>撮った日が違っても、大きさ・位置・タイミングを自動で揃えるから、残った差だけがフォームの違いになります。</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px">
+<a class="st-cta" href="https://apps.apple.com/jp/app/swingtwin/id6806578247" style="background:#FACC15;color:#14110A">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="M7 10l5 5 5-5"></path><path d="M5 21h14"></path></svg>
+App Store で入手</a>
+<span style="font-size:13px;color:#9AA8C0;line-height:1.6">本体無料（広告あり）<br>広告なしの SwingTwin Pro あり</span>
+</div>
+</div>
+
+<div class="st-hero-phones" style="flex:1 1 380px;min-width:0;position:relative;height:560px">
+<svg viewBox="0 0 600 600" aria-hidden="true" style="position:absolute;left:50%;top:50%;width:min(520px,115%);height:auto;transform:translate(-50%,-50%)">
+<path d="M300 30 A270 270 0 0 0 300 570" fill="none" stroke="#4C8DF6" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 22 400 1000" opacity=".55"></path>
+<path d="M300 570 A270 270 0 0 0 300 30" fill="none" stroke="#3ED6B5" stroke-width="3" stroke-linecap="round" stroke-dasharray="0 22 400 1000" opacity=".55"></path>
+<path d="M58 284 L74 300 L58 316" fill="none" stroke="#4C8DF6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".7"></path>
+<path d="M542 284 L526 300 L542 316" fill="none" stroke="#3ED6B5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".7"></path>
+</svg>
+<div style="position:absolute;left:50%;top:50%;width:min(212px,40%);transform:translate(-92%,-46%) rotate(-5deg);opacity:.92">
+<img class="st-phone" src="images/03-sidebyside-trails.jpg" alt="比較再生画面。左右に並べた2本のスイングそれぞれにクラブヘッドの軌跡を表示している">
+</div>
+<div style="position:absolute;left:50%;top:50%;width:min(230px,44%);transform:translate(-14%,-52%) rotate(3deg);box-shadow:0 40px 80px rgba(0,0,0,.55);border-radius:36px">
+<img class="st-phone" src="images/01-overlay-trails.jpg" alt="比較再生画面。重ねた2本のスイングに、3色に分かれたクラブヘッドの軌跡を表示している">
+</div>
+</div>
+</div>
 </header>
 
-<section>
-  <div class="wrap">
-    <h2>撮った日が違っても、同じ大きさ・同じ位置に揃う</h2>
-    <p class="sub">打席の場所も、カメラを置く距離も、その日によって違います。そのまま並べても、写り方が違うだけでフォームの差なのか分かりません。</p>
+<!-- ===== ALIGN ===== -->
+<section style="padding:112px 0;background:#0F1729;border-top:1px solid #1C2740">
+<div class="st-wrap">
+<div style="font-family:Outfit,sans-serif;font-weight:600;font-size:13px;letter-spacing:.2em;color:#3ED6B5;margin-bottom:16px">ALIGN FIRST</div>
+<h2 style="margin:0 0 20px;font-weight:900;font-size:clamp(28px,3.6vw,42px);line-height:1.4">撮った日が違っても、<br>同じ大きさ・同じ位置に揃う</h2>
+<p style="margin:0 0 56px;color:#B4C0D4;max-width:38em">打席の場所も、カメラを置く距離も、その日によって違います。そのまま並べても、写り方が違うだけでフォームの差なのか分かりません。</p>
 
-    <div class="compare">
-      <div>
-        <div class="label">よくある比較</div>
-        <strong>ただ並べて見る</strong>
-        <p>大きさも位置もバラバラなまま並ぶので、見比べるのに毎回頭の中で補正が必要です。</p>
-      </div>
-      <div>
-        <div class="label">SwingTwin</div>
-        <strong>自動で土台を揃えてから重ねる</strong>
-        <p>身長が同じ大きさに、足元が同じ位置になるよう自動で合わせます。土台が揃うので、残った差だけがフォームの違いです。</p>
-      </div>
-    </div>
-  </div>
+<div style="display:flex;flex-wrap:wrap;gap:24px">
+<div style="flex:1 1 320px;min-width:0;background:#0A101D;border:1px solid #1F2B45;border-radius:24px;padding:32px">
+<svg viewBox="0 0 320 180" role="img" aria-label="大きさと位置がずれた2つの人物の枠" style="width:100%;height:auto;display:block;margin-bottom:24px">
+<rect x="0" y="0" width="320" height="180" rx="14" fill="#111A2E"></rect>
+<line x1="20" y1="158" x2="300" y2="158" stroke="#2A3653" stroke-width="2"></line>
+<rect x="70" y="40" width="54" height="118" rx="27" fill="none" stroke="#4C8DF6" stroke-width="3"></rect>
+<rect x="176" y="78" width="38" height="70" rx="19" fill="none" stroke="#3ED6B5" stroke-width="3"></rect>
+<line x1="176" y1="148" x2="214" y2="148" stroke="#3ED6B5" stroke-width="2" stroke-dasharray="4 4"></line>
+</svg>
+<div style="font-size:13px;color:#7E8BA3;margin-bottom:6px">よくある比較</div>
+<div style="font-weight:700;font-size:20px;margin-bottom:10px">ただ並べて見る</div>
+<p style="margin:0;color:#9AA8C0;font-size:15px">大きさも位置もバラバラなまま並ぶので、見比べるのに補正が必要です。</p>
+</div>
+
+<div style="flex:1 1 320px;min-width:0;background:#0A101D;border:1px solid #2C4A6E;border-radius:24px;padding:32px">
+<svg viewBox="0 0 320 180" role="img" aria-label="大きさと足元の位置が揃って重なった2つの人物の枠" style="width:100%;height:auto;display:block;margin-bottom:24px">
+<rect x="0" y="0" width="320" height="180" rx="14" fill="#111A2E"></rect>
+<line x1="20" y1="158" x2="300" y2="158" stroke="#2A3653" stroke-width="2"></line>
+<rect x="130" y="40" width="54" height="118" rx="27" fill="none" stroke="#4C8DF6" stroke-width="3"></rect>
+<rect x="138" y="40" width="54" height="118" rx="27" fill="none" stroke="#3ED6B5" stroke-width="3"></rect>
+<circle cx="161" cy="158" r="5" fill="#FACC15"></circle>
+<line x1="161" y1="24" x2="161" y2="170" stroke="#FACC15" stroke-width="1.5" stroke-dasharray="3 5" opacity=".7"></line>
+</svg>
+<div style="font-size:13px;color:#3ED6B5;margin-bottom:6px">SwingTwin</div>
+<div style="font-weight:700;font-size:20px;margin-bottom:10px">自動で土台を揃えてから重ねる</div>
+<p style="margin:0;color:#9AA8C0;font-size:15px">身長が同じ大きさに、足元が同じ位置になるよう自動で合わせます。土台が揃うので、残った差だけがフォームの違いです。</p>
+</div>
+</div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="row">
-      <div>
-        <h2>動画を2本選ぶだけ</h2>
-        <p>写真アプリから「旧スイング」に過去の動画、「新スイング」に今の動画を選びます。2本そろうと、人物の大きさと位置を合わせる解析が自動で始まります。</p>
-        <p class="sub" style="margin-bottom:0">アプリ内に撮影機能はありません。iPhone標準のカメラなどで撮った動画をそのまま使います。</p>
-      </div>
-      <div class="shot"><img src="images/shot-video-select.png" alt="スイングを選ぶ画面。旧スイングと新スイングの動画を選択し、位置合わせ済みと表示されている" loading="lazy"></div>
-    </div>
-  </div>
+<!-- ===== STEPS ===== -->
+<section style="padding:112px 0">
+<div class="st-wrap">
+<div style="font-family:Outfit,sans-serif;font-weight:600;font-size:13px;letter-spacing:.2em;color:#3ED6B5;margin-bottom:16px">HOW IT WORKS</div>
+<h2 style="margin:0 0 64px;font-weight:900;font-size:clamp(28px,3.6vw,42px);line-height:1.4">選んで、合わせて、重ねる</h2>
+
+<div style="display:flex;flex-wrap:wrap;gap:48px 32px">
+<div style="flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:28px">
+<div style="max-width:260px;width:100%;margin:0 auto"><img class="st-phone" src="images/05-video-select.jpg" alt="スイングを選ぶ画面。旧スイングと新スイングの動画を選択し、位置合わせ済みと表示されている" loading="lazy"></div>
+<div>
+<div style="font-family:Outfit,sans-serif;font-weight:700;font-size:44px;line-height:1;color:#2C3A57;margin-bottom:12px">01</div>
+<h3 style="margin:0 0 10px;font-size:21px;font-weight:700">動画を2本選ぶだけ</h3>
+<p style="margin:0 0 10px;color:#B4C0D4;font-size:15px">写真アプリから「旧スイング」に過去の動画、「新スイング」に今の動画を選びます。2本そろうと、人物の大きさと位置を合わせる解析が自動で始まります。</p>
+<p style="margin:0;color:#7E8BA3;font-size:13px">アプリ内に撮影機能はありません。iPhone標準のカメラなどで撮った動画をそのまま使います。</p>
+</div>
+</div>
+
+<div style="flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:28px">
+<div style="max-width:260px;width:100%;margin:0 auto"><img class="st-phone" src="images/04-checkpoints.jpg" alt="基準点を指定する画面。始動・トップ・インパクト・フォローの4点を指定済み" loading="lazy"></div>
+<div>
+<div style="font-family:Outfit,sans-serif;font-weight:700;font-size:44px;line-height:1;color:#2C3A57;margin-bottom:12px">02</div>
+<h3 style="margin:0 0 10px;font-size:21px;font-weight:700">同じ瞬間で見比べる</h3>
+<p style="margin:0 0 10px;color:#B4C0D4;font-size:15px">始動・トップ・インパクト・フォローの4点を指定すると、その間の速さを区間ごとに合わせて、同じ瞬間どうしが並ぶようにします。</p>
+<p style="margin:0;color:#7E8BA3;font-size:13px">スライダーで場面を探し、1コマずつ調整できます。</p>
+</div>
+</div>
+
+<div style="flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:28px">
+<div style="max-width:260px;width:100%;margin:0 auto"><img class="st-phone" src="images/02-overlay-free.jpg" alt="比較再生画面。旧スイングと新スイングをトップの瞬間で重ねて表示している" loading="lazy"></div>
+<div>
+<div style="font-family:Outfit,sans-serif;font-weight:700;font-size:44px;line-height:1;color:#2C3A57;margin-bottom:12px">03</div>
+<h3 style="margin:0 0 10px;font-size:21px;font-weight:700">重ねる／並べる、どちらでも</h3>
+<p style="margin:0 0 10px;color:#B4C0D4;font-size:15px">重ねて透かして見れば、ズレがそのまま差として見えます。新しい方の濃さは自由に変えられます。</p>
+<p style="margin:0;color:#7E8BA3;font-size:13px">左右に並べれば、それぞれの形をしっかり確認できます。</p>
+</div>
+</div>
+</div>
+
+<div style="margin-top:72px;padding:28px 32px;border:1px solid #1F2B45;border-radius:20px;display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px">
+<div style="font-weight:700;font-size:16px;flex:0 0 auto">細かく見るための操作</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<span style="padding:8px 16px;border-radius:999px;background:#131D33;font-size:14px;color:#C9D3E3">0.25倍・0.5倍のスロー再生</span>
+<span style="padding:8px 16px;border-radius:999px;background:#131D33;font-size:14px;color:#C9D3E3">1コマずつの送り戻し</span>
+<span style="padding:8px 16px;border-radius:999px;background:#131D33;font-size:14px;color:#C9D3E3">4つの基準点へワンタップ移動</span>
+<span style="padding:8px 16px;border-radius:999px;background:#131D33;font-size:14px;color:#C9D3E3">ピンチで拡大・縮小・移動</span>
+</div>
+</div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="row flip">
-      <div class="shot"><img src="images/shot-checkpoints.png" alt="基準点を指定する画面。始動・トップ・インパクト・フォローの4点を指定済み" loading="lazy"></div>
-      <div>
-        <h2>トップもインパクトも、同じ瞬間で見比べる</h2>
-        <p>スイングの速さは日によって変わります。始動・トップ・インパクト・フォローの4点を指定すると、その間の速さを区間ごとに合わせて、同じ瞬間どうしが並ぶようにします。</p>
-        <p class="sub" style="margin-bottom:0">スライダーで場面を探し、1コマずつ調整できます。</p>
-      </div>
-    </div>
-  </div>
+<!-- ===== TRAILS ===== -->
+<section style="padding:112px 0;background:#0F1729;border-top:1px solid #1C2740;border-bottom:1px solid #1C2740">
+<div class="st-wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:64px">
+<div style="flex:1 1 420px;min-width:0">
+<div style="font-family:Outfit,sans-serif;font-weight:600;font-size:13px;letter-spacing:.2em;color:#FACC15;margin-bottom:16px">CLUB HEAD TRAIL</div>
+<h2 style="margin:0 0 20px;font-weight:900;font-size:clamp(28px,3.6vw,42px);line-height:1.4">クラブヘッドの軌跡も、<br>重ねて見る</h2>
+<p style="margin:0 0 28px;color:#B4C0D4">後方（飛球線の後ろ）から撮ったスロー動画では、クラブヘッドの軌跡を3色に分けて描けます。旧は青系、新は暖色系で、トップとインパクトで色が変わるので、どの区間で軌道が違うのかを追えます。書き出しにも軌跡を含められます。</p>
+
+<div style="display:grid;grid-template-columns:minmax(0,1fr) 72px 72px;gap:14px 16px;align-items:center;margin-bottom:32px;max-width:400px;font-size:15px">
+<span></span>
+<span style="font-size:13px;color:#9AA8C0">旧</span>
+<span style="font-size:13px;color:#9AA8C0">新</span>
+<span>始動 → トップ</span>
+<span style="display:flex;align-items:center"><span style="display:block;width:44px;height:5px;border-radius:3px;background:#22D3EE"></span></span>
+<span style="display:flex;align-items:center"><span style="display:block;width:44px;height:5px;border-radius:3px;background:#FACC15"></span></span>
+<span>トップ → インパクト</span>
+<span style="display:flex;align-items:center"><span style="display:block;width:44px;height:5px;border-radius:3px;background:#818CF8"></span></span>
+<span style="display:flex;align-items:center"><span style="display:block;width:44px;height:5px;border-radius:3px;background:#FB7185"></span></span>
+<span>インパクト → フォロー</span>
+<span style="display:flex;align-items:center"><span style="display:block;width:44px;height:5px;border-radius:3px;background:#C084FC"></span></span>
+<span style="display:flex;align-items:center"><span style="display:block;width:44px;height:5px;border-radius:3px;background:#FB923C"></span></span>
+</div>
+
+<div style="padding:20px 22px;border-radius:16px;background:#0A101D;color:#9AA8C0;font-size:14px;line-height:1.75">
+未加入の方は、比較1組ごとに短い広告を1本見ると使えます（回数の制限はありません）。スロー撮影でない動画では軌跡の操作は使えず、その理由が画面に表示されます。後方から撮ったスロー動画でも、クラブヘッドを検出できない場合は軌跡を描けません。
+</div>
+</div>
+
+<div style="flex:1 1 420px;min-width:0;display:flex;gap:20px;justify-content:center">
+<div style="flex:0 1 250px;min-width:0"><img class="st-phone" src="images/01-overlay-trails.jpg" alt="重ねた2本のスイングに、3色に分かれたクラブヘッドの軌跡を表示している" loading="lazy"></div>
+<div class="st-hide-sm" style="flex:0 1 250px;min-width:0;margin-top:64px"><img class="st-phone" src="images/03-sidebyside-trails.jpg" alt="左右に並べた2本のスイングそれぞれに、クラブヘッドの軌跡を表示している" loading="lazy"></div>
+</div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div class="row">
-      <div>
-        <h2>重ねる／並べる、どちらでも</h2>
-        <p>重ねて透かして見れば、ズレがそのまま差として見えます。新しい方の濃さは自由に変えられます。</p>
-        <p class="sub" style="margin-bottom:0">左右に並べれば、それぞれの形をしっかり確認できます。</p>
-      </div>
-      <div class="shot"><img src="images/shot-overlay-free.png" alt="比較再生画面。旧スイングと新スイングをトップの瞬間で重ねて表示している（軌跡なし）" loading="lazy"></div>
-    </div>
-  </div>
+<!-- ===== EXPORT + PRIVACY ===== -->
+<section style="padding:112px 0">
+<div class="st-wrap" style="display:flex;flex-wrap:wrap;gap:24px">
+<div style="flex:1 1 400px;min-width:0;border:1px solid #1F2B45;border-radius:24px;padding:40px">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4C8DF6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-bottom:24px"><rect x="3" y="5" width="13" height="14" rx="2"></rect><path d="M16 10l5-3v10l-5-3"></path></svg>
+<h2 style="margin:0 0 14px;font-weight:700;font-size:24px;line-height:1.5">比較した結果は、動画として残せる</h2>
+<p style="margin:0;color:#B4C0D4;font-size:15px">重ねた映像をそのまま書き出して、写真アプリに保存できます。「並べる／重ねる」に加えて、軌跡を含めるかも選べます。アプリを開かなくても、練習の後に見返せます。未加入の方は、書き出すたびに短い広告を1本見てから書き出します。</p>
+</div>
+<div style="flex:1 1 400px;min-width:0;border:1px solid #1F2B45;border-radius:24px;padding:40px">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#3ED6B5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-bottom:24px"><rect x="6" y="2" width="12" height="20" rx="3"></rect><path d="M10 11V9a2 2 0 0 1 4 0v2"></path><rect x="9" y="11" width="6" height="5" rx="1"></rect></svg>
+<h2 style="margin:0 0 14px;font-weight:700;font-size:24px;line-height:1.5">動画は iPhone の中で完結します</h2>
+<p style="margin:0 0 14px;color:#B4C0D4;font-size:15px">動画をどこかへ送信することはありません。解析・比較・書き出しは、すべて端末の中だけで行われます。アカウント登録も不要です。</p>
+<p style="margin:0;color:#7E8BA3;font-size:13px">広告には Google AdMob を使用しています。未加入の場合、動画選択画面の下部にバナー広告が、基準点の指定画面から比較へ進むときに全画面広告が表示されることがあります。オフラインのときは広告を見られないため、軌跡と書き出しは使えません。</p>
+</div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <div>
-      <div>
-        <h2>細かく見るための操作</h2>
-        <ul>
-          <li>0.25倍・0.5倍のスロー再生</li>
-          <li>1コマずつの送り戻し</li>
-          <li>始動・トップ・インパクト・フォローへのワンタップ移動</li>
-          <li>ピンチ操作での拡大・縮小・移動</li>
-        </ul>
-        <p class="sub" style="margin-bottom:0">気になる瞬間で止めて、じっくり見られます。</p>
-      </div>
-    </div>
-  </div>
+<!-- ===== PRICING ===== -->
+<section style="padding:112px 0;background:#0F1729;border-top:1px solid #1C2740">
+<div class="st-wrap">
+<div style="font-family:Outfit,sans-serif;font-weight:600;font-size:13px;letter-spacing:.2em;color:#3ED6B5;margin-bottom:16px">PLANS</div>
+<h2 style="margin:0 0 56px;font-weight:900;font-size:clamp(28px,3.6vw,42px);line-height:1.4">無料で使える機能と、<br>SwingTwin Pro</h2>
+
+<div style="display:flex;flex-wrap:wrap;gap:24px;align-items:stretch">
+<div style="flex:1 1 360px;min-width:0;background:#0A101D;border:1px solid #1F2B45;border-radius:24px;padding:40px;display:flex;flex-direction:column">
+<div style="font-weight:700;font-size:20px;margin-bottom:4px">無料</div>
+<div style="font-family:Outfit,sans-serif;font-weight:700;font-size:40px;line-height:1.3;margin-bottom:24px">¥0</div>
+<div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:#C9D3E3">
+<div style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ED6B5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;margin-top:4px"><path d="M5 12l5 5 9-10"></path></svg><span>重ねる／並べる比較</span></div>
+<div style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ED6B5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;margin-top:4px"><path d="M5 12l5 5 9-10"></path></svg><span>自動の位置合わせ</span></div>
+<div style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ED6B5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;margin-top:4px"><path d="M5 12l5 5 9-10"></path></svg><span>4基準点の時間同期</span></div>
+<div style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ED6B5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;margin-top:4px"><path d="M5 12l5 5 9-10"></path></svg><span>スロー再生とコマ送り（回数の制限なし）</span></div>
+<div style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7E8BA3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;margin-top:4px"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M10 9.5l4 2.5-4 2.5z"></path></svg><span>クラブヘッドの軌跡（比較1組ごと）と書き出し（1回ごと）は、短い広告を1本見ると使えます</span></div>
+</div>
+</div>
+
+<div style="flex:1 1 360px;min-width:0;background:#0A101D;border:2px solid #FACC15;border-radius:24px;padding:40px;display:flex;flex-direction:column;position:relative">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px"><span style="font-weight:700;font-size:20px">SwingTwin Pro</span></div>
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 20px;margin-bottom:24px">
+<span style="font-family:Outfit,sans-serif;font-weight:700;font-size:40px;line-height:1.3">¥150<span style="font-size:16px;font-weight:500;color:#9AA8C0"> / 月</span></span>
+<span style="font-family:Outfit,sans-serif;font-weight:700;font-size:24px;color:#C9D3E3">¥1,200<span style="font-size:14px;font-weight:500;color:#9AA8C0"> / 年</span></span>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;font-size:15px;color:#C9D3E3">
+<div style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;margin-top:4px"><path d="M5 12l5 5 9-10"></path></svg><span>すべての広告が出なくなります</span></div>
+<div style="display:flex;gap:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FACC15" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;margin-top:4px"><path d="M5 12l5 5 9-10"></path></svg><span>軌跡も書き出しも、広告を見ずに使えます</span></div>
+</div>
+</div>
+</div>
+
+<p style="margin:32px 0 0;color:#7E8BA3;font-size:13px;line-height:1.8;max-width:56em">価格は変更される場合があります。実際の価格は購入画面でご確認ください。お支払いは購入の確定時に Apple アカウントに請求されます。サブスクリプションは、現在の期間が終わる24時間前までに解約しない限り自動で更新されます。解約は設定アプリのサブスクリプション管理から行えます。</p>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <h2>クラブヘッドの軌跡を重ねて見る</h2>
-    <p class="sub">後方（飛球線の後ろ）から撮ったスロー動画向けです。未加入の方は、比較1組ごとに短い広告を1本見ると使えます（回数の制限はありません）。</p>
-    <p>後方から撮ったスロー動画では、クラブヘッドの軌跡を3色（トップとインパクトで色が変わる）に分けて描けます。書き出しにも軌跡を含められるので、練習の後に見返しても違いが残ります。</p>
-    <p class="sub" style="margin-bottom:0">スロー撮影でない動画では軌跡の操作は使えず、その理由が画面に表示されます。後方から撮ったスロー動画でも、クラブヘッドを検出できない場合は軌跡を描けません。</p>
-    <div class="pair">
-      <img src="images/shot-overlay-trails.png" alt="比較再生画面。重ねた2人のスイングに、3色に分かれたクラブヘッドの軌跡を表示している" loading="lazy">
-      <img src="images/shot-sidebyside-trails.png" alt="比較再生画面。左右に並べた2人のスイングそれぞれに、クラブヘッドの軌跡を表示している" loading="lazy">
-    </div>
-  </div>
+<!-- ===== FINAL CTA ===== -->
+<section style="padding:120px 0 96px;text-align:center">
+<div class="st-wrap">
+<img src="images/appicon.png" alt="SwingTwin アプリアイコン" style="width:96px;height:96px;border-radius:22px;margin-bottom:28px">
+<h2 style="margin:0 0 16px;font-weight:900;font-size:clamp(26px,3.4vw,38px);line-height:1.45">過去の自分と、今の自分を重ねて</h2>
+<p style="margin:0 auto 36px;color:#B4C0D4;max-width:32em">過去と今を見比べたい方、練習の成果を映像で確かめたい方、動画は撮るけれど見返し方に迷っていた方へ。</p>
+<a class="st-cta" href="https://apps.apple.com/jp/app/swingtwin/id6806578247" style="background:#FACC15;color:#14110A">App Store で入手</a>
+<div style="margin:48px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 28px;font-size:13px;color:#7E8BA3">
+<span>iOS 17.0 以上の iPhone</span>
+<span>写真アプリに保存された動画を使用</span>
+<span>1本あたり 0.2〜60秒</span>
+</div>
+</div>
 </section>
 
-<section>
-  <div class="wrap">
-    <h2>比較した結果は、動画として残せる</h2>
-    <p>重ねた映像をそのまま書き出して、写真アプリに保存できます。書き出しでは「並べる／重ねる」に加えて、軌跡を含めるかも選べます。アプリを開かなくても、練習の後に見返せます。未加入の方は、書き出すたびに短い広告を1本見てから書き出します。</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>無料で使える機能と、有料プラン（SwingTwin Pro）</h2>
-    <p>無料でも、重ねる／並べる比較・自動の位置合わせ・4基準点の時間同期・スロー再生とコマ送りは回数の制限なくお使いいただけます。クラブヘッドの軌跡（比較1組ごと）と書き出し（1回ごと）は、短い広告を1本見ると、回数の制限なくお使いいただけます。</p>
-    <p>SwingTwin Pro に加入すると、すべての広告が出なくなります。軌跡も書き出しも、広告を見ずにお使いいただけます。</p>
-    <table class="plan">
-      <tr><th>月額</th><td>¥150（1か月）</td></tr>
-      <tr><th>年額</th><td>¥1,200（1年）</td></tr>
-    </table>
-    <div class="note">
-      価格は変更される場合があります。実際の価格は購入画面でご確認ください。お支払いは購入の確定時に Apple アカウントに請求されます。サブスクリプションは、現在の期間が終わる24時間前までに解約しない限り自動で更新されます。解約は設定アプリのサブスクリプション管理から行えます。
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>動画は iPhone の中で完結します</h2>
-    <p>動画をどこかへ送信することはありません。解析・比較・書き出しは、すべて端末の中だけで行われます。アカウント登録も不要です。</p>
-    <p>広告には Google AdMob を使用しています。未加入の場合、動画選択画面の下部にバナー広告が、基準点の指定画面から比較へ進むときに全画面広告が表示されることがあります。オフラインのときは広告を見られないため、軌跡と書き出しは使えません。</p>
-    <div class="note">
-      こんな方に向いています——過去の自分と今の自分を見比べたい方、練習の成果を数字ではなく映像で確かめたい方、動画は撮るけど見返し方に迷っていた方。
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>対応環境</h2>
-    <ul>
-      <li>iOS 17.0 以上の iPhone</li>
-      <li>比較する動画は、写真アプリに保存されている必要があります（アプリ内に撮影機能はありません）</li>
-      <li>1本あたり 0.2秒〜60秒の動画に対応しています</li>
-    </ul>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <p><a class="cta" href="https://apps.apple.com/jp/app/swingtwin/id6806578247">App Store で見る</a></p>
-    <p style="margin-top:26px">
-      <a href="https://shoheicraftdev-design.github.io/swingtwin-support/">サポート・使い方</a>
-      <a href="https://shoheicraftdev-design.github.io/swingtwin-support/privacy.html">プライバシーポリシー</a>
-      <a href="https://shoheicraftdev-design.github.io/swingtwin-support/terms.html">利用規約</a>
-      <a href="mailto:shohei.craft.dev@gmail.com">お問い合わせ</a>
-    </p>
-    <p style="margin-top:18px">ShoheiCraftDev</p>
-  </div>
+<footer class="st-foot" style="border-top:1px solid #1C2740;padding:36px 0 48px">
+<div class="st-wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;font-size:13px;color:#7E8BA3">
+<span>ShoheiCraftDev</span>
+<nav style="display:flex;flex-wrap:wrap;gap:8px 24px">
+<a href="https://shoheicraftdev-design.github.io/swingtwin-support/">サポート・使い方</a>
+<a href="https://shoheicraftdev-design.github.io/swingtwin-support/privacy.html">プライバシーポリシー</a>
+<a href="https://shoheicraftdev-design.github.io/swingtwin-support/terms.html">利用規約</a>
+<a href="mailto:shohei.craft.dev@gmail.com">お問い合わせ</a>
+</nav>
+</div>
 </footer>
 
+</div>
 </body>
 </html>

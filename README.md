@@ -27,13 +27,13 @@ ASC のマーケティングURL に本ページ（`https://shoheicraftdev-design
 | ファイル | 元 |
 | :--- | :--- |
 | `appicon.png` | `GolfSwingCompare/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png` の縮小（256px） |
-| `shot-overlay-trails.png` | `docs/appstore/screenshots/ver-2.0/6.5-inch/01-overlay-trails.png`（重ねる＋軌跡・有料プラン） |
-| `shot-overlay-free.png` | `docs/appstore/screenshots/ver-2.0/6.5-inch/02-overlay-free.png`（重ねる・軌跡なし） |
-| `shot-sidebyside-trails.png` | `docs/appstore/screenshots/ver-2.0/6.5-inch/03-sidebyside-trails.png`（並べる＋軌跡・有料プラン） |
-| `shot-checkpoints.png` | `docs/appstore/screenshots/ver-2.0/6.5-inch/04-checkpoints.png`（基準点を指定） |
-| `shot-video-select.png` | `docs/appstore/screenshots/ver-2.0/6.5-inch/05-video-select.png`（スイングを選ぶ・位置合わせ済み） |
+| `01-overlay-trails.jpg` | `docs/appstore/screenshots/ver-2.1/6.9-inch/01-overlay-trails.png`（重ねる＋軌跡） |
+| `02-overlay-free.jpg` | `docs/appstore/screenshots/ver-2.1/6.9-inch/02-overlay-free.png`（重ねる・軌跡なし） |
+| `03-sidebyside-trails.jpg` | `docs/appstore/screenshots/ver-2.1/6.9-inch/03-sidebyside-trails.png`（並べる＋軌跡） |
+| `04-checkpoints.jpg` | `docs/appstore/screenshots/ver-2.1/6.9-inch/04-checkpoints.png`（基準点を指定） |
+| `05-video-select.jpg` | `docs/appstore/screenshots/ver-2.1/6.9-inch/05-video-select.png`（スイングを選ぶ・位置合わせ済み） |
 
-いずれも長辺640pxへ縮小（`sips -Z 640`・296×640）。キャプション帯は掲載スクショに焼き込まれたまま。差し替える場合は元の1284×2778から作り直すこと。
+いずれも掲載スクショ（1320×2868）から上部のキャプション帯（578px）を切り落として画面部分だけにし、幅640px・JPEG（品質86）に縮小したもの（2026-10-05 デザイン刷新）。画面部分は横1057px・中央寄せ。
 
 ## 文言のルール（アプリ側 `docs/appstore/ver-2.0-store-listing.md` の内容を継承）
 
