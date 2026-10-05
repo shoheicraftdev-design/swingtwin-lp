@@ -15,7 +15,7 @@ GearDeban LP（`geardeban-lp`）・Sodato LP（`sodato-lp`）・えも日LP（`e
 ## 内容の版
 
 **ブランチ `ver-2.0`: ver-2.0（2026-09-28 審査提出・審査中）に合わせて作成。審査承認・App Store 公開を確認してから main へ入れる（それまで公開しない）。**
-正本はアプリ側 `docs/appstore/ver-2.0-store-listing.md`（§2 サブタイトル・§6 説明文・§7 有料プラン）と `ver-2.0-submission.md`。LP で新しい言い回しを作らない。
+機能の参照先はアプリ側 `docs/appstore/ver-2.0-store-listing.md`（§2 サブタイトル・§6 説明文・§7 有料プラン）と `ver-2.0-submission.md`。文言の正本: **この LP 自身**。ASC の説明文と揃えなくてよい（2026-10-05 CEO 決裁・全製品）。機能の事実関係はアプリ側を参照し、下の「文言のルール」の禁止事項は引き続き守る。
 ASC のマーケティングURL に本ページ（`https://shoheicraftdev-design.github.io/swingtwin-lp/`）を ver-2.0 で設定済み（submission #31）。
 
 **v1.1 に合わせて更新（2026-09-28）。** v1.0（2026-09-02 App Store 公開）で作成し、v1.1 で対応環境を iOS 17.0 以上に訂正、ピンチでの拡大・縮小・移動と書き出し形式（並べる／重ねる）の選択を追記。
